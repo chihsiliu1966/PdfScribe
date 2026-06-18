@@ -1,31 +1,30 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Linq;
-using System.Text;
+using System.Runtime.InteropServices;
 using System.Security;
-
-using Microsoft.Win32;
+using System.Text;
 
 namespace PdfScribeInstallCustomAction
 {
- 
+
     public class PdfScribeInstaller
     {
         #region Printer Driver Win32 API Constants
 
         const uint DRIVER_KERNELMODE = 0x00000001;
-        const uint DRIVER_USERMODE =  0x00000002;
-        
-        const uint APD_STRICT_UPGRADE =  0x00000001;
+        const uint DRIVER_USERMODE = 0x00000002;
+
+        const uint APD_STRICT_UPGRADE = 0x00000001;
         const uint APD_STRICT_DOWNGRADE = 0x00000002;
         const uint APD_COPY_ALL_FILES = 0x00000004;
         const uint APD_COPY_NEW_FILES = 0x00000008;
         const uint APD_COPY_FROM_DIRECTORY = 0x00000010;
-        
+
         const uint DPD_DELETE_UNUSED_FILES = 0x00000001;
         const uint DPD_DELETE_SPECIFIC_VERSION = 0x00000002;
         const uint DPD_DELETE_ALL_FILES = 0x00000004;
@@ -38,21 +37,21 @@ namespace PdfScribeInstallCustomAction
         private readonly String logEventSourceNameDefault = "PdfScribeCore";
 
         const string ENVIRONMENT_64 = "Windows x64";
-        const string PRINTERNAME = "PDF Scribe";
-        const string DRIVERNAME = "PDF Scribe Virtual Printer";
-        const string HARDWAREID = "PDFScribe_Driver0101";
+        const string PRINTERNAME = "Th290 Scribe";
+        const string DRIVERNAME = "Th290 Scribe Virtual Printer";
+        const string HARDWAREID = "Th290Scribe_Driver0101";
         const string PORTMONITOR = "PDFSCRIBE";
         const string MONITORDLL = "redmon64pdfscribe.dll";
         const string PORTNAME = "PSCRIBE:";
         const string PRINTPROCESOR = "winprint";
 
         const string DRIVERMANUFACTURER = "S T Chan";
-        
+
         const string DRIVERFILE = "PSCRIPT5.DLL";
         const string DRIVERUIFILE = "PS5UI.DLL";
         const string DRIVERHELPFILE = "PSCRIPT.HLP";
         const string DRIVERDATAFILE = "SCPDFPRN.PPD";
-        
+
         enum DriverFileIndex
         {
             Min = 0,
@@ -98,7 +97,7 @@ namespace PdfScribeInstallCustomAction
             this.logEventSource.Listeners.Add(additionalListener);
         }
 
-        
+
         #region Constructors
 
         public PdfScribeInstaller()
@@ -356,7 +355,7 @@ namespace PdfScribeInstallCustomAction
                 oldRedirectValue = DisableWow64Redirection();
 
                 monitorDllFullPathname = Path.Combine(Environment.SystemDirectory, monitorDll);
-                
+
                 File.Delete(monitorDllFullPathname);
                 monitorDllRemoved = true;
             }
@@ -365,15 +364,15 @@ namespace PdfScribeInstallCustomAction
                 // This one is likely very bad -
                 // log and rethrow so we don't continue
                 // to try to uninstall
-                logEventSource.TraceEvent(TraceEventType.Critical, 
-                                          (int)TraceEventType.Critical, 
+                logEventSource.TraceEvent(TraceEventType.Critical,
+                                          (int)TraceEventType.Critical,
                                           NATIVE_COULDNOTENABLE64REDIRECTION + String.Format(WIN32ERROR, windows32Ex.NativeErrorCode.ToString()));
                 throw;
             }
             catch (IOException)
             {
                 // File still in use
-                logEventSource.TraceEvent(TraceEventType.Error, (int)TraceEventType.Error, String.Format(FILENOTDELETED_INUSE, monitorDllFullPathname));  
+                logEventSource.TraceEvent(TraceEventType.Error, (int)TraceEventType.Error, String.Format(FILENOTDELETED_INUSE, monitorDllFullPathname));
             }
             catch (UnauthorizedAccessException)
             {
@@ -390,8 +389,8 @@ namespace PdfScribeInstallCustomAction
                 {
                     // Couldn't turn file redirection back on -
                     // this is not good
-                    logEventSource.TraceEvent(TraceEventType.Critical, 
-                                              (int)TraceEventType.Critical, 
+                    logEventSource.TraceEvent(TraceEventType.Critical,
+                                              (int)TraceEventType.Critical,
                                               NATIVE_COULDNOTREVERT64REDIRECTION + String.Format(WIN32ERROR, windows32Ex.NativeErrorCode.ToString()));
                     throw;
                 }
@@ -685,7 +684,7 @@ namespace PdfScribeInstallCustomAction
                 filesCopied = true;
             }
             catch (IOException ioEx)
-            { 
+            {
                 logEventSource.TraceEvent(TraceEventType.Error,
                                           (int)TraceEventType.Error,
                                           String.Format(FILENOTCOPIED_PRINTERDRIVER, ioEx.Message));
@@ -842,10 +841,10 @@ namespace PdfScribeInstallCustomAction
             if (printerDriverInstalled == false)
             {
                 //int lastWinError = Marshal.GetLastWin32Error();
-                //throw new Win32Exception(Marshal.GetLastWin32Error(), "Could not add printer PDF Scribe printer driver.");
+                //throw new Win32Exception(Marshal.GetLastWin32Error(), "Could not add printer Th290 Scribe printer driver.");
                 logEventSource.TraceEvent(TraceEventType.Error,
                                           (int)TraceEventType.Error,
-                                          "Could not add PDF Scribe printer driver. " +
+                                          "Could not add Th290 Scribe printer driver. " +
                                           String.Format(WIN32ERROR, Marshal.GetLastWin32Error().ToString()));
             }
             return printerDriverInstalled;
@@ -863,7 +862,7 @@ namespace PdfScribeInstallCustomAction
             {
                 logEventSource.TraceEvent(TraceEventType.Error,
                                           (int)TraceEventType.Error,
-                                          "Could not remove PDF Scribe printer driver. " +
+                                          "Could not remove Th290 Scribe printer driver. " +
                                           String.Format(WIN32ERROR, Marshal.GetLastWin32Error().ToString()));
             }
             return driverRemoved;
@@ -894,7 +893,7 @@ namespace PdfScribeInstallCustomAction
             {
                 logEventSource.TraceEvent(TraceEventType.Error,
                                           (int)TraceEventType.Error,
-                                          "Could not add PDF Scribe virtual printer. " + 
+                                          "Could not add Th290 Scribe virtual printer. " +
                                           String.Format(WIN32ERROR, Marshal.GetLastWin32Error().ToString()));
             }
             return printerAdded;
@@ -921,7 +920,7 @@ namespace PdfScribeInstallCustomAction
                 {
                     logEventSource.TraceEvent(TraceEventType.Error,
                                               (int)TraceEventType.Error,
-                                              "Could not delete PDF Scribe virtual printer. "  +
+                                              "Could not delete Th290 Scribe virtual printer. " +
                                               String.Format(WIN32ERROR, Marshal.GetLastWin32Error().ToString()));
                 }
             }
@@ -978,7 +977,7 @@ namespace PdfScribeInstallCustomAction
 
         }
 
-        
+
         private bool ConfigurePdfScribePort(String commandValue,
                                             String argumentsValue)
         {
@@ -988,10 +987,10 @@ namespace PdfScribeInstallCustomAction
             RegistryKey portConfiguration;
             try
             {
-                portConfiguration = Registry.LocalMachine.CreateSubKey("SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\" + 
+                portConfiguration = Registry.LocalMachine.CreateSubKey("SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\" +
                                                                                 PORTMONITOR +
                                                                                 "\\Ports\\" + PORTNAME);
-                portConfiguration.SetValue("Description", "PDF Scribe", RegistryValueKind.String);
+                portConfiguration.SetValue("Description", "Th290 Scribe", RegistryValueKind.String);
                 portConfiguration.SetValue("Command", commandValue, RegistryValueKind.String);
                 portConfiguration.SetValue("Arguments", argumentsValue, RegistryValueKind.String);
                 portConfiguration.SetValue("Printer", PRINTERNAME, RegistryValueKind.String);

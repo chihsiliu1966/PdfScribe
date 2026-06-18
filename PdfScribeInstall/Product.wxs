@@ -1,6 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
 	<Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(ProductManufacturer)" UpgradeCode="409ff0d1-1c3a-4f8d-8a5a-350705977809">
-		<SummaryInformation Description="PDF Scribe Virtual Printer" />
+		<SummaryInformation Description="Th290 Scribe Virtual Printer" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowDowngrades="no" AllowSameVersionUpgrades="no" />
 		<MediaTemplate EmbedCab="yes" />
@@ -8,7 +8,7 @@
 		<Icon Id="AdobeIcon.ico" SourceFile="..\Common\AdobeIcon.ico" />
 		<Property Id="ARPPRODUCTICON" Value="AdobeIcon.ico" />
 
-		<Feature Id="ProductFeature" Title="PdfScribe" Level="1">
+		<Feature Id="ProductFeature" Title="Th290Scribe" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 
@@ -45,7 +45,7 @@
 
 	<Fragment>
 			<StandardDirectory Id="ProgramFiles64Folder">
-				<Directory Id="INSTALLFOLDER" Name="PdfScribe" />
+				<Directory Id="INSTALLFOLDER" Name="Th290Scribe" />
 			</StandardDirectory>
 		</Fragment>
 

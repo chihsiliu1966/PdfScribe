@@ -58,7 +58,7 @@
             this.Name = "SetOutputFilename";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PDF Scribe";
+            this.Text = "Th290 Scribe";
             this.ResumeLayout(false);
             this.PerformLayout();
 

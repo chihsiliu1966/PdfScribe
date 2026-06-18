@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xunit;
-
-using PdfScribeInstallCustomAction;
+﻿using PdfScribeInstallCustomAction;
+using System;
 
 namespace PdfScribeTests
 {
@@ -39,14 +32,14 @@ namespace PdfScribeTests
         public void Test_IsPrinterDriverInstalled()
         {
             var scribeInstaller = new PdfScribeInstaller();
-            scribeInstaller.IsPrinterDriverInstalled_Test("PDF Scribe Virtual Printer");
+            scribeInstaller.IsPrinterDriverInstalled_Test("Th290 Scribe Virtual Printer");
         }
 
         //[Test]
         public void Test_InstallPdfScribePrinter()
         {
             var scribeInstaller = new PdfScribeInstaller();
-            scribeInstaller.InstallPdfScribePrinter(@"C:\Code\PdfScribe\Lib\", String.Empty, String.Empty);
+            scribeInstaller.InstallPdfScribePrinter(@"D:\Library\virtual Printer\PdfScribe-master\PdfScribe\Lib\", String.Empty, String.Empty);
         }
 
         //[Test]

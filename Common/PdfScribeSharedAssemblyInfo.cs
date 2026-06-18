@@ -4,7 +4,7 @@
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyCompany("Black Telescope Workshop")]
-[assembly: AssemblyProduct("PDF Scribe")]
+[assembly: AssemblyProduct("Th290 Scribe")]
 [assembly: AssemblyCopyright("Copyright © S T Chan 2013-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

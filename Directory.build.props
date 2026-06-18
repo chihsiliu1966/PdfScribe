@@ -8,6 +8,6 @@
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 		<ProductVersion>$(Version)</ProductVersion>
-		<ProductName>PDF Scribe</ProductName>
+		<ProductName>Th290 Scribe</ProductName>
 	</PropertyGroup>
 </Project>

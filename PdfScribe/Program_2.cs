@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -31,7 +29,7 @@ namespace PdfScribe
                             pdfFilenameDialog.CheckPathExists = true;
                             pdfFilenameDialog.Filter = "pdf files (*.pdf)|*.pdf";
                             pdfFilenameDialog.ShowHelp = false;
-                            pdfFilenameDialog.Title = "PDF Scribe - Set output filename";
+                            pdfFilenameDialog.Title = "Th290 Scribe - Set output filename";
                             pdfFilenameDialog.ValidateNames = true;
                             if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("REDMON_DOCNAME")))
                             {
@@ -99,8 +97,11 @@ namespace PdfScribe
         private static String GetOutputFilename()
         {
             String outputFilename = Path.GetFullPath(Environment.ExpandEnvironmentVariables(Properties.Settings.Default.OutputFile));
+
+            outputFilename = Path.GetDirectoryName(outputFilename) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmssms") + "_" + Path.GetFileName(outputFilename);
+            //outputFilename="C:\\Anchor\\pdfprint2"
             // Check if there are any % characters -
-            // even though it's a legal Windows filename character,
+            // even though it's a legal Windows filename character, 
             // it is a special character to Ghostscript
             if (outputFilename.Contains("%"))
                 throw new ArgumentException("OutputFile setting contains % character.");
@@ -109,9 +110,8 @@ namespace PdfScribe
 
 
         /// <summary>
-        /// Opens the PDF in the default viewer
-        /// if the OpenAfterCreating app setting is "True"
-        /// and the file extension is .PDF
+        /// Opens the PDF in the default viewer if the OpenAfterCreating app setting is "True" and the file extension is
+        /// .PDF
         /// </summary>
         /// <param name="pdfFilename"></param>
         static void DisplayPdf(String pdfFilename)
@@ -162,14 +162,14 @@ namespace PdfScribe
                             {
                                 case (int)NoDistillStripping.Searching:
                                     if (inputLine == "%ADOBeginClientInjection: DocumentSetup Start \"No Re-Distill\"")
-                                        strippingStatus= NoDistillStripping.Removing;
+                                        strippingStatus = NoDistillStripping.Removing;
                                     else
                                         strippedWriter.WriteLine(inputLine);
                                     break;
                                 case (int)NoDistillStripping.Removing:
                                     if (inputLine == "%ADOEndClientInjection: DocumentSetup Start \"No Re-Distill\"")
                                         strippingStatus = NoDistillStripping.Complete;
-                                        break;
+                                    break;
                                 case (int)NoDistillStripping.Complete:
                                     strippedWriter.WriteLine(inputLine);
                                     break;

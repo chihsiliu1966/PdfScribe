@@ -1,11 +1,12 @@
 ﻿<Project>
   <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="5.0.2" />
   <PropertyGroup>
-    <Platforms>x64</Platforms>
+    <Platforms>AnyCPU</Platforms>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <BuildConstants>ProductVersion=$(ProductVersion);ProductManufacturer=$(Company);ProductName=$(ProductName)</BuildConstants>
+	<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Cultures />
